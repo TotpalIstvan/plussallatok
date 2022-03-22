@@ -15,8 +15,8 @@ class PlussallatokController extends Controller
      */
     public function index()
     {
-        $plussok = Plussallat::orderBy('id')->get();
-        return view('plussok.index', [ 'plussok' => $plussok]);
+        $plussok = Plussallat::all();
+        return response()->json($plussok);
     }
 
     /**
@@ -37,11 +37,10 @@ class PlussallatokController extends Controller
      */
     public function store(Request $request)
     {
-        $adatok = $request->only(['név']);
-        $pluss = new Plussallat();
-        $pluss->fill($adatok);
-        $pluss->save();
-        return redirect()->route('plussok.index');
+        $plussallat = new Plussallat();
+        $plussallat->fill($request->all());
+        $plussallat->save();
+        return response()->json($plussallat);
     }
 
     /**
@@ -52,7 +51,10 @@ class PlussallatokController extends Controller
      */
     public function show(Plussallat $pluss)
     {
-        //
+        $plussallat = Plussallat::find($pluss);
+        if(is_null($plussallat))
+            return response()->json(["message" => "A megadott azonosítóval nem található plüssállat."]);
+        return response()->json($plussallat);
     }
 
     /**
@@ -75,10 +77,12 @@ class PlussallatokController extends Controller
      */
     public function update(Request $request, Plussallat $pluss)
     {
-        $adatok = $request->only(['név']);
-        $pluss->fill($adatok);
-        $pluss->save();
-        return redirect()->route('plussok.index', $pluss->id);
+        $plussallat = Plussallat::find($pluss);
+        if(is_null($plussallat))
+            return response()->json(["message" => "A megadott azonosítóval nem található plüssállat."]);
+        $plussallat->fill($request->all());
+        $plussallat->save();
+        return response()->json($plussallat);
     }
 
     /**
@@ -89,7 +93,10 @@ class PlussallatokController extends Controller
      */
     public function destroy(Plussallat $pluss)
     {
-        $pluss->delete();
-        return redirect()->route('plussok.index');
+        $plussallat = Plussallat::find($pluss);
+        if(is_null($plussallat))
+            return response()->json(["message" => "A megadott azonosítóval nem található plüssállat."]);
+        Plussallat::destroy($pluss);
+        return response()->noContent();
     }
 }

@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/plussallat', PlussallatokController::class);
+Route::resource('plussallat', PlussallatokController::class);
