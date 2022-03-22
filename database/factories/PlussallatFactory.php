@@ -17,7 +17,7 @@ class plussallatFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'név' => $this->faker->name()
         ];
     }
 }
