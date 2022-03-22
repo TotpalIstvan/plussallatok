@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\plussallat;
+use App\Models\Plussallat;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +15,6 @@ class PlussallatSeeder extends Seeder
      */
     public function run()
     {
-        plussallat::factory(15)->create();
+        Plussallat::factory(15)->create();
     }
 }

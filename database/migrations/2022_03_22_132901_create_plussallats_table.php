@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('plussallats', function (Blueprint $table) {
             $table->id();
-            $table->string('Név');
+            $table->string('név');
             $table->timestamps();
         });
     }
