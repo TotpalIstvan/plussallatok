@@ -10,5 +10,5 @@ class Plussallat extends Model
     use HasFactory;
     protected $fillable = ['név'];
 
-    protected $visible = ['név'];
+    protected $visible = ['id','név'];
 }
